@@ -21,4 +21,21 @@ class ReposManager(private val api: GithubClient = GithubClient()) {
             }
         }
     }
+
+    fun getReadmeHtml(owner: String, repo: String): Observable<String> {
+        return Observable.create {
+            subscriber ->
+
+            val call = api.getReadmeHtml(owner, repo)
+            val response = call.execute()
+
+            if (response.isSuccessful) {
+                val string = response.body()?.string()
+                string?.let { subscriber.onNext(it) }
+                subscriber.onComplete()
+            } else {
+                subscriber.onError(Throwable(response.message()))
+            }
+        }
+    }
 }

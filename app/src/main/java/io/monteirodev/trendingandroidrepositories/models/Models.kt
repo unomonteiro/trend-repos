@@ -18,7 +18,9 @@ class Repository(val id: Int,
                       val language: String?) : Parcelable
 
 @Parcelize
-class Owner(@Json(name = "avatar_url") val avatarUrl: String) : Parcelable
+class Owner(@Json(name = "avatar_url") val avatarUrl: String,
+            val login: String) : Parcelable
+
 
 @Parcelize
 class License(val name: String) : Parcelable
