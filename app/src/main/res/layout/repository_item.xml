@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/name_text_view"
+        app:layout_constraintEnd_toStartOf="@+id/stars_image_view"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="A Hugemongous very long name"
+        style="@style/item_name" />
+
+    <TextView
+        android:id="@+id/description_text_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_text_view"
+        tools:text="Description"
+        style="@style/item_description" />
+
+    <TextView
+        android:id="@+id/stargazers_text_view"
+        app:layout_constraintBottom_toBottomOf="@+id/stars_image_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/stars_image_view"
+        tools:text="10000"
+        style="@style/item_stargazers" />
+
+    <ImageView
+        android:id="@+id/stars_image_view"
+        app:layout_constraintBottom_toBottomOf="@+id/name_text_view"
+        app:layout_constraintEnd_toStartOf="@+id/stargazers_text_view"
+        app:layout_constraintTop_toTopOf="@+id/name_text_view"
+        app:srcCompat="@android:drawable/btn_star"
+        style="@style/item_stars_image" />
+
+</android.support.constraint.ConstraintLayout>

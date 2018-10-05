@@ -8,4 +8,44 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="recycler_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingTop">@dimen/dimen8dp</item>
+        <item name="android:paddingBottom">@dimen/dimen8dp</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="item_name">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dimen16dp</item>
+        <item name="android:layout_marginTop">@dimen/dimen8dp</item>
+        <item name="android:layout_marginEnd">@dimen/dimen8dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Title</item>
+    </style>
+
+    <style name="item_description">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dimen16dp</item>
+        <item name="android:layout_marginTop">@dimen/dimen8dp</item>
+        <item name="android:layout_marginBottom">@dimen/dimen8dp</item>
+    </style>
+
+    <style name="item_stargazers">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/dimen16dp</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Title</item>
+    </style>
+
+    <style name="item_stars_image">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:contentDescription">@string/star_image_description</item>
+        <item name="android:layout_marginEnd">@dimen/dimen8dp</item>
+    </style>
+
 </resources>
