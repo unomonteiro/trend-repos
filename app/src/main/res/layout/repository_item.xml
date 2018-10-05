@@ -35,7 +35,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/name_text_view"
         app:layout_constraintEnd_toStartOf="@+id/stargazers_text_view"
         app:layout_constraintTop_toTopOf="@+id/name_text_view"
-        app:srcCompat="@android:drawable/btn_star"
+        android:contentDescription="@string/star_image_description"
+        android:src="@drawable/ic_star"
         style="@style/item_stars_image" />
 
 </android.support.constraint.ConstraintLayout>

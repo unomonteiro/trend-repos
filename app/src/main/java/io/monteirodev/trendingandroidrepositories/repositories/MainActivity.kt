@@ -6,18 +6,21 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout.VERTICAL
 import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
 import io.monteirodev.trendingandroidrepositories.R
+import io.monteirodev.trendingandroidrepositories.details.DetailsActivity
 import io.monteirodev.trendingandroidrepositories.models.Repository
 import io.monteirodev.trendingandroidrepositories.network.ReposManager
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    protected var subscriptions = CompositeDisposable()
+
     private val REPO_LIST_KEY = "REPO_LIST_KEY"
-    private val repoAdapter by lazy { RepositoryAdapter() }
+    private val repoAdapter by lazy { RepositoryAdapter(this::repoClicked) }
     private val reposManager by lazy { ReposManager() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +33,19 @@ class MainActivity : AppCompatActivity() {
         } else {
             requestRepositories()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        subscriptions = CompositeDisposable()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (!subscriptions.isDisposed) {
+            subscriptions.dispose()
+        }
+        subscriptions.clear()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -58,5 +74,11 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
                         }
                 )
+        subscriptions.add(subscription)
+    }
+
+    fun repoClicked(repository: Repository) {
+        val intent = DetailsActivity.newIntent(this, repository)
+        startActivity(intent)
     }
 }

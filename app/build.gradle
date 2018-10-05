@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
 
 android {
@@ -33,6 +34,7 @@ ext {
     junitVersion = "4.12"
     espressoCoreVersion = "3.0.2"
 
+    glideVersion = "4.8.0"
     mochiVersion = "2.0.0"
     retrofitVersion = "2.4.0"
     rxAndroidVersion = "2.1.0"
@@ -50,6 +52,10 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "com.android.support.test:runner:$runnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoCoreVersion"
+
+    // glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     // moshi
     implementation "com.squareup.retrofit2:converter-moshi:$mochiVersion"
