@@ -20,16 +20,12 @@ class DetailsActivity : AppCompatActivity() {
         val repository = intent.getParcelableExtra<Repository>(INTENT_REPOSITORY)
         title = repository.name
 
-        avatar_image_view.loadImg(repository.owner.avatarUrl)
-        name_text_view.text = repository.name
-        description_text_view.text = repository.description
-        watchers_text_view.text = repository.watchersCount
-        stars_text_view.text = repository.stargazersCount
-        fork_text_view.text = repository.forksCount
-        language_value_text_view.text = repository.language
-        license_value.text = repository.license?.name
-
-
+        if (savedInstanceState == null) {
+            val detailsFragment = DetailsFragment.newInstance(repository)
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.details_container, detailsFragment)
+                    .commit()
+        }
     }
 
     companion object {
