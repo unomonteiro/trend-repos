@@ -12,6 +12,7 @@ interface GithubApi {
     // https://api.github.com/search/repositories?q=android&l=java,kotlin&sort=stars&order=desc
     @GET("search/repositories")
     fun getRepositories(
+            @Query("page") int: Int = 0,
             @Query("q") query: String,
             @Query("l") language: String,
             @Query("sort") sort: String,

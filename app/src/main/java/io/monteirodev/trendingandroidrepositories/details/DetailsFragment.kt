@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebSettings
 import android.widget.Toast
 import io.monteirodev.trendingandroidrepositories.R
 import io.monteirodev.trendingandroidrepositories.commons.loadImg
@@ -49,11 +50,8 @@ class DetailsFragment : Fragment() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             { readmeHtml ->
-                                view.readme_webview.loadDataWithBaseURL(
-                                        "http://www.github.com",
-                                        readmeHtml, "text/html",
-                                        "UTF-8",
-                                        null)
+                                view.readme_webview.loadData(
+                                        readmeHtml, "text/html", "UTF-8")
                             },
                             { e ->
                                 Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()

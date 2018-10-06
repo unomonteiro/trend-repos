@@ -5,11 +5,11 @@ import io.monteirodev.trendingandroidrepositories.models.Repository
 import io.reactivex.Observable
 
 class ReposManager(private val api: GithubClient = GithubClient()) {
-    fun getRepos(): Observable<ArrayList<Repository>> {
+    fun getRepos(page: Int): Observable<ArrayList<Repository>> {
         return Observable.create {
             subscriber ->
 
-            val callResponse = api.getRepositories()
+            val callResponse = api.getRepositories(page)
             val response = callResponse.execute()
 
             if (response.isSuccessful && response.body()?.items != null) {
@@ -26,15 +26,13 @@ class ReposManager(private val api: GithubClient = GithubClient()) {
         return Observable.create {
             subscriber ->
 
-            val call = api.getReadmeHtml(owner, repo)
-            val response = call.execute()
+            val readmeHtml = api.getReadmeHtml(owner, repo)
 
-            if (response.isSuccessful) {
-                val string = response.body()?.string()
-                string?.let { subscriber.onNext(it) }
+            if (readmeHtml != null) {
+                subscriber.onNext(readmeHtml)
                 subscriber.onComplete()
             } else {
-                subscriber.onError(Throwable(response.message()))
+                subscriber.onError(Throwable("Empty html"))
             }
         }
     }

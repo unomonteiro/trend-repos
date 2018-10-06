@@ -1,7 +1,6 @@
 package io.monteirodev.trendingandroidrepositories.api
 
 import io.monteirodev.trendingandroidrepositories.models.GitHubResponse
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -18,15 +17,16 @@ class GithubClient {
         githubApi = retrofit.create(GithubApi::class.java)
     }
 
-    fun getRepositories(): Call<GitHubResponse> {
+    fun getRepositories(page: Int): Call<GitHubResponse> {
         return githubApi.getRepositories(
+                page,
                 "android",
                 "java,kotlin",
                 "stars",
                 "desc")
     }
 
-    fun getReadmeHtml(owner: String, repo: String): Call<ResponseBody> {
-        return githubApi.getReadmeHtml(owner, repo)
+    fun getReadmeHtml(owner: String, repo: String): String? {
+        return githubApi.getReadmeHtml(owner, repo).execute().body()?.string()
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView.NO_POSITION
 import android.widget.LinearLayout.VERTICAL
 import android.widget.Toast
 import io.monteirodev.trendingandroidrepositories.R
+import io.monteirodev.trendingandroidrepositories.commons.InfiniteScrollListener
 import io.monteirodev.trendingandroidrepositories.details.DetailsActivity
 import io.monteirodev.trendingandroidrepositories.details.DetailsFragment
 import io.monteirodev.trendingandroidrepositories.models.Repository
@@ -68,14 +69,18 @@ class MainActivity : AppCompatActivity() {
     private fun initAdapter() {
         repository_list.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            val linearLayout = LinearLayoutManager(this@MainActivity)
+            layoutManager = linearLayout
             addItemDecoration(DividerItemDecoration(this@MainActivity,VERTICAL))
+            clearOnScrollListeners()
+            addOnScrollListener(InfiniteScrollListener(
+                    {requestRepositories()}, linearLayout))
             adapter = repoAdapter
         }
     }
 
     private fun requestRepositories() {
-        val subscription = reposManager.getRepos()
+        val subscription = reposManager.getRepos(repoAdapter.itemCount / 30)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

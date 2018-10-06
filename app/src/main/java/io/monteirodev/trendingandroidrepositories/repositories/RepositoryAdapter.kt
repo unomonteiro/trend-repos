@@ -22,6 +22,7 @@ class RepositoryAdapter(val clickListener: (Repository) -> Unit) : RecyclerView.
 
     fun addRepos(newRepos: ArrayList<Repository>) {
         repoList.addAll(newRepos)
+        repoList.sortByDescending { repository -> repository.stargazersCount }
         notifyDataSetChanged()
     }
 
